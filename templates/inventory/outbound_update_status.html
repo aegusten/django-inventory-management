@@ -1,0 +1,23 @@
+<!-- templates/inventory/outbound_update_status.html -->
+ 
+{% extends 'base.html' %}
+{% load widget_tweaks %}
+
+{% block content %}
+<h1 class="my-4">Update Outbound Status</h1>
+
+<form method="post" class="form">
+    {% csrf_token %}
+    <div class="form-group">
+        <label for="status">Current Status: {{ outbound.status }}</label>
+        <select name="status" id="status" class="form-control">
+            <option value="Pending" {% if outbound.status == 'Pending' %}selected{% endif %}>Pending</option>
+            <option value="Shipped" {% if outbound.status == 'Shipped' %}selected{% endif %}>Shipped</option>
+            <option value="Delivered" {% if outbound.status == 'Delivered' %}selected{% endif %}>Delivered</option>
+            <option value="Canceled" {% if outbound.status == 'Canceled' %}selected{% endif %}>Canceled</option>
+        </select>
+    </div>
+    <button type="submit" class="btn btn-primary">Update Status</button>
+    <a href="{% url 'outbound_list' %}" class="btn btn-secondary">Cancel</a>
+</form>
+{% endblock %}

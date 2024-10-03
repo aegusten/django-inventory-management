@@ -1,0 +1,39 @@
+<!-- templates/inventory/customer_list.html -->
+
+{% extends 'base.html' %}
+
+{% block content %}
+<h1 class="my-4">Customers</h1>
+
+<div class="mb-3">
+    <a href="{% url 'customer_add' %}" class="btn btn-success">Add Customer</a>
+</div>
+
+<table class="table table-hover">
+    <thead class="thead-light">
+        <tr>
+            <th>Name</th>
+            <th>Contact Person</th>
+            <th>Email</th>
+            <th>Phone</th>
+            <th>Address</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for customer in customers %}
+        <tr>
+            <td>{{ customer.name }}</td>
+            <td>{{ customer.contact_person }}</td>
+            <td>{{ customer.contact_email }}</td>
+            <td>{{ customer.contact_phone }}</td>
+            <td>{{ customer.address }}</td>
+        </tr>
+        {% empty %}
+        <tr>
+            <td colspan="5" class="text-center">No customers found.</td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+
+{% endblock %}

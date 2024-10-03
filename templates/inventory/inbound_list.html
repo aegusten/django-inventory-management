@@ -1,0 +1,45 @@
+<!-- File: templates/inventory/inbound_list.html -->
+
+{% extends 'base.html' %}
+
+{% block content %}
+<h1 class="my-4">Inbound Records</h1>
+
+
+<div class="mb-3 d-flex justify-content-between">
+    <a href="{% url 'inbound_add' %}" class="btn btn-success">Add New Inbound</a>
+</div>
+
+<!-- Inbound Records Table -->
+<table class="table table-bordered table-hover">
+    <thead class="thead-light">
+        <tr>
+            <th>Reference</th>
+            <th>Date Received</th>
+            <th>Product SKU</th>
+            <th>Product Name</th>
+            <th>Quantity</th>
+            <th>Location</th>
+            <th>Remarks</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for inbound in inbounds %}
+        <tr>
+            <td>{{ inbound.reference }}</td>
+            <td>{{ inbound.date_received|date:"Y-m-d H:i" }}</td>
+            <td>{{ inbound.product.sku }}</td>
+            <td>{{ inbound.product.name }}</td>
+            <td>{{ inbound.quantity }}</td>
+            <td>{{ inbound.location }}</td>
+            <td>{{ inbound.remarks }}</td>
+        </tr>
+        {% empty %}
+        <tr>
+            <td colspan="7" class="text-center">No inbound records found.</td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+
+{% endblock %}

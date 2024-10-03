@@ -1,0 +1,9 @@
+<!-- templates/inventory/transaction_list.html -->
+
+<td>
+    {% if transaction.user %}
+        {{ transaction.user.username }}
+    {% else %}
+        System
+    {% endif %}
+</td>

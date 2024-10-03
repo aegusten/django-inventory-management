@@ -1,0 +1,12 @@
+<!-- templates/inventory/trigger_automated_inbound.html -->
+
+{% extends 'base.html' %}
+
+{% block content %}
+<h1>Trigger Automated Inbound</h1>
+<p>Click the button below to run the automated inbound process.</p>
+<form method="post">
+    {% csrf_token %}
+    <button type="submit" class="btn btn-primary">Run Automated Inbound</button>
+</form>
+{% endblock %}

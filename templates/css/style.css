@@ -1,0 +1,26 @@
+body {
+    background-color: #f8f9fa;
+}
+
+.card {
+    border-radius: 10px;
+}
+
+.btn-primary {
+    background-color: #007bff;
+    border: none;
+    transition: background-color 0.3s ease;
+}
+
+.btn-primary:hover {
+    background-color: #0056b3;
+}
+
+label {
+    color: #007bff;
+    font-weight: bold;
+}
+
+h2 {
+    color: #007bff;
+}

@@ -1,0 +1,42 @@
+<!-- templates/inventory/scheduled_outbound_list.html -->
+
+{% extends 'base.html' %}
+
+{% block content %}
+<h1 class="my-4">Scheduled Outbounds</h1>
+
+<div class="mb-3">
+    <a href="{% url 'scheduled_outbound_add' %}" class="btn btn-success">Add Scheduled Outbound</a>
+</div>
+
+<table class="table table-bordered">
+    <thead class="thead-light">
+        <tr>
+            <th>Customer</th>
+            <th>Product</th>
+            <th>Quantity</th>
+            <th>Scheduled Date</th>
+            <th>Destination</th>
+            <th>Remarks</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for outbound in scheduled_outbounds %}
+        <tr>
+            <td>{{ outbound.customer.name }}</td>
+            <td>{{ outbound.product.name }}</td>
+            <td>{{ outbound.quantity }}</td>
+            <td>{{ outbound.scheduled_date|date:"Y-m-d H:i" }}</td>
+            <td>{{ outbound.destination }}</td>
+            <td>{{ outbound.remarks }}</td>
+        </tr>
+        {% empty %}
+        <tr>
+            <td colspan="6" class="text-center">No scheduled outbounds found.</td>
+        </tr>
+        {% endfor %}
+    </tbody>
+    
+</table>
+
+{% endblock %}

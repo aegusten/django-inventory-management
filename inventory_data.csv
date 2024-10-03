@@ -1,0 +1,6 @@
+id,category,sku,name,location,quantity,supplier
+1,Electronic,PRD001,Apple iPhone 12 Pro,Storage A,50,Apple
+2,Furniture,PRD002,Ergonomic Chair ,Storage D,20,Office Pro
+3,Clothing,PRD003,Nike Air Max 270,Storage B,80,Nike
+4,Electronic,PRD004,Samsung Galaxy S21,Storage A,100,Samsung
+5,Clothing,PRD005,Basic White Tees,Storage C,200,UNIQLO

@@ -1,0 +1,26 @@
+<!-- templates/upload_csv_preview.html -->
+
+{% extends 'base.html' %}
+
+{% block content %}
+<h1 class="my-4">{{ title }}</h1>
+
+<form method="post" class="form">
+    {% csrf_token %}
+    <table class="table table-bordered">
+        <thead>
+            <tr>
+                <th>Reference</th>
+                <th>Date Received</th>
+                <th>Product</th>
+                <th>Quantity</th>
+                <th>Location</th>
+                <th>Remarks</th>
+            </tr>
+        </thead>
+    </table>
+
+    <button type="submit" formaction="{% url 'confirm_csv_upload' %}" class="btn btn-primary">Confirm Upload</button>
+    <a href="{% url 'inbound_list' %}" class="btn btn-secondary">Cancel</a>
+</form>
+{% endblock %}

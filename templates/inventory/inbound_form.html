@@ -1,0 +1,119 @@
+<!-- templates/inventory/inbound_form.html -->
+
+{% extends 'base.html' %}
+{% load widget_tweaks %}
+
+{% block content %}
+<h1 class="my-4">{{ title }}</h1>
+
+<form method="post" class="form">
+    {% csrf_token %}
+    {% if form.errors %}
+    <div class="alert alert-danger">
+        <ul>
+            {% for field in form %}
+                {% for error in field.errors %}
+                    <li>{{ field.label }}: {{ error }}</li>
+                {% endfor %}
+            {% endfor %}
+            {% for error in form.non_field_errors %}
+                <li>{{ error }}</li>
+            {% endfor %}
+        </ul>
+    </div>
+    {% endif %}
+
+    <div class="form-row">
+        <div class="form-group col-md-6">
+            {{ form.reference.label_tag }}
+            {{ form.reference|add_class:"form-control" }}
+        </div>
+        <div class="form-group col-md-6">
+            {{ form.date_received.label_tag }}
+            {{ form.date_received|add_class:"form-control" }}
+        </div>
+    </div>
+
+    <div class="form-group">
+        {{ form.product.label_tag }}
+        {{ form.product|add_class:"form-control" }}
+    </div>
+
+    <h5 class="mt-4">Or Add New Product</h5>
+    <div class="form-row">
+        <div class="form-group col-md-6">
+            {{ form.new_product_sku.label_tag }}
+            {{ form.new_product_sku|add_class:"form-control" }}
+        </div>
+        <div class="form-group col-md-6">
+            {{ form.new_product_name.label_tag }}
+            {{ form.new_product_name|add_class:"form-control" }}
+        </div>
+    </div>
+
+    <!-- New fields for Category, Supplier, Location -->
+    <div class="form-row">
+        <div class="form-group col-md-4">
+            {{ form.new_category.label_tag }}
+            {{ form.new_category|add_class:"form-control" }}
+        </div>
+        <div class="form-group col-md-4">
+            {{ form.new_supplier.label_tag }}
+            {{ form.new_supplier|add_class:"form-control" }}
+        </div>
+        <div class="form-group col-md-4">
+            {{ form.new_location.label_tag }}
+            {{ form.new_location|add_class:"form-control" }}
+        </div>
+    </div>
+
+    <div class="form-group">
+        {{ form.new_tags.label_tag }}
+        {{ form.new_tags|add_class:"form-control" }}
+    </div>
+
+    <div class="form-group">
+        {{ form.quantity.label_tag }}
+        {{ form.quantity|add_class:"form-control" }}
+    </div>
+    <div class="form-group">
+        {{ form.remarks.label_tag }}
+        {{ form.remarks|add_class:"form-control" }}
+    </div>
+
+    <button type="submit" class="btn btn-primary">Save</button>
+    <a href="{% url 'inbound_list' %}" class="btn btn-secondary">Cancel</a>
+</form>
+
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+        const productDropdown = document.querySelector("#id_product");
+        const newProductFields = [
+            document.querySelector("#id_new_product_name"),
+            document.querySelector("#id_new_product_sku"),
+            document.querySelector("#id_new_category"),
+            document.querySelector("#id_new_supplier"),
+            document.querySelector("#id_new_location"),
+            document.querySelector("#id_new_tags")
+        ];
+
+        function toggleFields() {
+            const anyNewProductFieldFilled = newProductFields.some(field => field.value.trim() !== "");
+            productDropdown.disabled = anyNewProductFieldFilled;
+
+            newProductFields.forEach(field => {
+                field.disabled = productDropdown.value !== "";
+            });
+        }
+
+        productDropdown.addEventListener("change", toggleFields);
+        newProductFields.forEach(field => {
+            field.addEventListener("input", toggleFields);
+        });
+
+        toggleFields();
+    });
+</script>
+
+
+{% endblock %}

@@ -1,0 +1,12 @@
+<!-- templates/inventory/trigger_processes.html -->
+
+{% extends 'base.html' %}
+
+{% block content %}
+<h1>Trigger Automated Processes</h1>
+<form method="post">
+    {% csrf_token %}
+    <button name="process" value="inbound" class="btn btn-primary">Run Automated Inbound</button>
+    <button name="process" value="outbound" class="btn btn-secondary">Run Automated Outbound</button>
+</form>
+{% endblock %}

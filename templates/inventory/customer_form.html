@@ -1,0 +1,54 @@
+<!-- templates/inventory/customer_form.html -->
+
+{% extends 'base.html' %}
+{% load widget_tweaks %}
+
+{% block content %}
+<h1 class="my-4">{{ title }}</h1>
+
+<form method="post" class="form">
+    {% csrf_token %}
+    {% if form.errors %}
+    <div class="alert alert-danger">
+        <ul>
+            {% for field in form %}
+                {% for error in field.errors %}
+                    <li>{{ field.label }}: {{ error }}</li>
+                {% endfor %}
+            {% endfor %}
+            {% for error in form.non_field_errors %}
+                <li>{{ error }}</li>
+            {% endfor %}
+        </ul>
+    </div>
+    {% endif %}
+
+    <div class="form-group">
+        {{ form.name.label_tag }}
+        {{ form.name|add_class:"form-control" }}
+    </div>
+
+    <div class="form-group">
+        {{ form.address.label_tag }}
+        {{ form.address|add_class:"form-control" }}
+    </div>
+
+    <div class="form-group">
+        {{ form.contact_person.label_tag }}
+        {{ form.contact_person|add_class:"form-control" }}
+    </div>
+
+    <div class="form-group">
+        {{ form.contact_email.label_tag }}
+        {{ form.contact_email|add_class:"form-control" }}
+    </div>
+
+    <div class="form-group">
+        {{ form.contact_phone.label_tag }}
+        {{ form.contact_phone|add_class:"form-control" }}
+    </div>
+
+    <button type="submit" class="btn btn-primary">Save</button>
+    <a href="{% url 'customer_list' %}" class="btn btn-secondary">Cancel</a>
+</form>
+{% endblock %}

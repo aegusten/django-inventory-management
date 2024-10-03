@@ -1,0 +1,21 @@
+<!-- templates/inventory/inventory_detail.html -->
+
+{% extends 'base.html' %}
+
+{% block content %}
+<h1 class="my-4">{{ product.name }}</h1>
+<ul class="list-group mb-4">
+    <li class="list-group-item"><strong>SKU:</strong> {{ product.sku }}</li>
+    <li class="list-group-item"><strong>Category:</strong> {{ product.category }}</li>
+    <li class="list-group-item"><strong>Location:</strong> {{ product.location }}</li>
+    <li class="list-group-item"><strong>Total Quantity:</strong> {{ product.quantity }}</li>
+    <li class="list-group-item"><strong>Reserved Quantity:</strong> {{ product.reserved_quantity }}</li>
+    <li class="list-group-item"><strong>Available Quantity:</strong> {{ product.available_quantity }}</li>
+    <li class="list-group-item"><strong>Supplier:</strong> {{ product.supplier }}</li>
+</ul>
+{% if user.role in 'Admin Manager' %}
+    <a href="{% url 'inventory_edit' product.sku %}" class="btn btn-warning">Edit Product</a>
+    <a href="{% url 'inventory_delete' product.sku %}" class="btn btn-danger">Delete Product</a>
+{% endif %}
+<a href="{% url 'inventory_list' %}" class="btn btn-secondary">Back to Inventory List</a>
+{% endblock %}

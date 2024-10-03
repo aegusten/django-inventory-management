@@ -1,0 +1,16 @@
+<!-- templates/upload_csv.html -->
+
+{% extends 'base.html' %}
+
+{% block content %}
+<h1 class="my-4">{{ title }}</h1>
+<form method="post" enctype="multipart/form-data" class="form">
+    {% csrf_token %}
+    <div class="form-group">
+        {{ form.csv_file.label_tag }}
+        {{ form.csv_file }}
+    </div>
+    <button type="submit" class="btn btn-primary">Upload</button>
+    <a href="{% url 'inbound_list' %}" class="btn btn-secondary">Cancel</a>
+</form>
+{% endblock %}

@@ -1,0 +1,85 @@
+<!-- templates/base.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <!-- Required meta tags -->
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Warehouse Management System</title>
+
+    <!-- Bootstrap CSS via CDN -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <!-- Optional: Include any additional CSS here -->
+    <style>
+        /* Custom CSS for Sidebar */
+        body {
+            display: flex;
+            min-height: 100vh;
+            flex-direction: column;
+            margin: 0;
+        }
+        #wrapper {
+            display: flex;
+            width: 100%;
+        }
+        #sidebar-wrapper {
+            min-width: 250px;
+            max-width: 250px;
+            background-color: #f8f9fa;
+            border-right: 1px solid #dee2e6;
+        }
+        #page-content-wrapper {
+            width: 100%;
+            padding: 20px;
+        }
+        .list-group-item {
+            border: none;
+        }
+    </style>
+</head>
+<body>
+    <div id="wrapper">
+        <!-- Sidebar -->
+        {% if user.is_authenticated %}
+        <div id="sidebar-wrapper">
+            <div class="sidebar-heading text-center py-4 primary-text fs-4 fw-bold text-uppercase">
+                Warehouse Management
+            </div>
+            <div class="list-group list-group-flush">
+                {% if user.role in 'Admin Manager' %}
+                    <a href="{% url 'inventory_list' %}" class="list-group-item list-group-item-action bg-transparent second-text fw-bold">Inventory</a>
+                    <a href="{% url 'inbound_list' %}" class="list-group-item list-group-item-action bg-transparent second-text fw-bold">Inbound</a>
+                    <a href="{% url 'outbound_list' %}" class="list-group-item list-group-item-action bg-transparent second-text fw-bold">Outbound</a>
+                    <a href="{% url 'scheduled_outbound_list' %}" class="list-group-item list-group-item-action bg-transparent second-text fw-bold">Scheduled Outbounds</a>
+                    <a href="{% url 'customer_list' %}" class="list-group-item list-group-item-action bg-transparent second-text fw-bold">Customers</a>
+                    {% if user.role == 'Admin' %}
+                        <a href="{% url 'user_list' %}" class="list-group-item list-group-item-action bg-transparent second-text fw-bold">User Management</a>
+                    {% endif %}
+                {% elif user.role == 'Operator' %}
+                    <a href="{% url 'inbound_list' %}" class="list-group-item list-group-item-action bg-transparent second-text fw-bold">Inbound</a>
+                    <a href="{% url 'outbound_list' %}" class="list-group-item list-group-item-action bg-transparent second-text fw-bold">Outbound</a>
+                {% endif %}
+                <a href="{% url 'profile' %}" class="list-group-item list-group-item-action bg-transparent second-text fw-bold">Profile</a>
+                <form method="post" action="{% url 'logout' %}" class="list-group-item bg-transparent">
+                    {% csrf_token %}
+                    <button type="submit" class="btn btn-link p-0 second-text fw-bold">Logout</button>
+                </form>
+            </div>
+        </div>
+        {% endif %}
+
+        <!-- Page Content -->
+        <div id="page-content-wrapper">
+            {% block content %}
+            {% endblock %}
+        </div>
+    </div>
+
+    <!-- jQuery and Bootstrap JS via CDN -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <!-- Include Popper.js if necessary -->
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
+    <!-- Include Bootstrap JS -->
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>
