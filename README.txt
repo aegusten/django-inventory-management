@@ -1,3 +1,12 @@
+3 Types of users:
+admin
+Manager
+Operator
+----------------------------------------
+Login:
+admin = admin
+manager=manager
+operator=operator
 ----------------------------------------
 Create the Database and Migrations:
 # Create fresh migrations
@@ -20,4 +29,3 @@ Run Celery Worker and Beat:
 celery -A warehouse_management worker -l info
 
 celery -A warehouse_management beat -l info
-
