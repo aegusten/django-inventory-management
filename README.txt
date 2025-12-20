@@ -1,13 +1,19 @@
+**Disclaimer**: This project is created **for testing, educational, and experimental purposes only**.  
+It is **not intended for commercial use**.  
+This is for **personal use only**, and the author retains **all rights** to the code and content.
+
+---
+
 3 Types of users:
 admin
 Manager
 Operator
-----------------------------------------
+---
 Login:
 admin = admin
 manager=manager
 operator=operator
-----------------------------------------
+---
 Create the Database and Migrations:
 # Create fresh migrations
 python manage.py makemigrations
@@ -18,7 +24,7 @@ python manage.py migrate
 #Apply seed_dummy_users
 python manage.py seed_dummy_users
 
----------------------------------------
+---
 Run the Server:
 python manage.py runserver
 
